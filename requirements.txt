@@ -1,0 +1,4 @@
+aiohttp==3.6.4
+discord.py==1.6.0
+jishaku==1.20.0.220
+pymongo==3.11.2
