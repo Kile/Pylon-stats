@@ -28,12 +28,12 @@ async def key(ctx, key:str=None):
             keys.update_one({'_id': ctx.author.id}, {'$set': {'key': key}})
         else:
             keys.insert_one({'_id': ctx.author.id, 'key': key})
-        await ctx.send(f'Successfully updated your Pylon api key to `{key}`')
+        await ctx.send(f'Successfully updated your Pylon API key to `{key}`')
     else:
         active_key = keys.find_one({'_id': ctx.author.id})
         if not active_key is None:
-            return await ctx.send(f'Your current registered api key is `{active_key}`')
-        await ctx.send('You don\'t have a key registered! For an instruction how to find your api key, use `p.find_key`')
+            return await ctx.send(f'Your current registered API key is `{active_key}`')
+        await ctx.send('You don\'t have a key registered! For an instruction how to find your API key, use `p.find_key`')
 
 @bot.command()
 async def find_key(ctx):
@@ -69,7 +69,7 @@ async def endpoints(ctx):
 async def help(ctx):
     embed=discord.Embed.from_dict({
         'title': 'Pylon-stats commands',
-        'description': '`p.find_key` explains how to find your Pylon api key\n\n`p.key <key>` saves your key\n\n`p.stats <optional_server_id>` Gives you Pylon stats about the given server provided you have permission\n\n`p.help` Displays this message\n\n`p.endpoints` Shows the Pylon API endpoints\n\n`p.info` Get some infos about this bot',
+        'description': '`p.find_key` explains how to find your Pylon API key\n\n`p.key <key>` saves your key\n\n`p.stats <optional_server_id>` Gives you Pylon stats about the given server provided you have permission\n\n`p.help` Displays this message\n\n`p.endpoints` Shows the Pylon API endpoints\n\n`p.info` Get some infos about this bot',
         'color': 0x426BE4,
         'thumbnail': {'url': 'https://cdn.discordapp.com/avatars/816460731654209596/00beaa4c6b5d09fb498b8bb02bce9762.png?size=1024'}
     })
@@ -79,7 +79,7 @@ async def help(ctx):
 async def info(ctx):
     embed=discord.Embed.from_dict({
         'title': 'Pylon-stats info',
-        'description': 'This bot uses the Pylon API to get infos about some Pylon stats on a server Pylon is on. It also provides recources to create your own api calls by giving you a list of endpoints with `p.endpoints`. Sadly this is not possible to do in the Pylon editor because Pylon blocks `fetch` requests to it\'s own API. Please contribute to improve functionaility of this bot [here](https://github.com/kile/pylon-stats)',
+        'description': 'This bot uses the Pylon API to get infos about some Pylon stats on a server Pylon is on. It also provides recources to create your own API calls by giving you a list of endpoints with `p.endpoints`. Sadly this is not possible to do in the Pylon editor because Pylon blocks `fetch` requests to it\'s own API. Please contribute to improve functionaility of this bot [here](https://github.com/kile/pylon-stats)',
         'color': 0x426BE4,
         'thumbnail': {'url': 'https://cdn.discordapp.com/avatars/816460731654209596/00beaa4c6b5d09fb498b8bb02bce9762.png?size=1024'}
     })
@@ -114,7 +114,7 @@ async def stats(ctx, guild_id:int=None):
             error = await r.text()
 
             embed = discord.Embed.from_dict({
-                'title': 'An error occured while handeling your request',
+                'title': 'An error occured while handling your request',
                 'description': str(error) + '\n\n(Check if your key is valid)',
                 'color': 0xFF0000
             })
@@ -124,7 +124,7 @@ async def stats(ctx, guild_id:int=None):
         response = await r.json()
     results = response[len(response)-1]
     embed=discord.Embed.from_dict({
-        'title': f'Pylon scrip stats on guild {guild_id}',
+        'title': f'Pylon script stats on guild {guild_id}',
         'description': f"**Data from:** {d.fromtimestamp(results['date']).strftime('%b %d %Y %H:%M:%S')}\n\n**CPU time:** {results['cpuMs']} ms\n**Execution time:** {results['executionMs']} ms\n**Host function calls:** {results['hostFunctionCalls']}\n**Fetch requests:** {results['fetchRequests']}\n**KV operations:** {results['kvOperations']}\n**Discord cache requests:** {results['discordCacheRequests']}\n**Discord api requests:** {results['discordApiRequests']}\n**Events:** {results['events']}\n**Average cpu time:** {results['cpuMsAvg']} ms\n**Average execution time:** {results['executionMsAvg']} ms",
         'color':0x426BE4,
         'thumbnail': {'url':'https://cdn.discordapp.com/attachments/757169610599694356/816638492603580426/pylon_cloud.png'}
