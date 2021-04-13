@@ -39,7 +39,7 @@ async def key(ctx, key:str=None):
 async def find_key(ctx):
     embed=discord.Embed.from_dict({
         'title': 'How to get your Pylon api token',
-        'description': '1) Open [pylon.bot](https://pylon.bot) in **google crome**\n\n2) Go into any script\n\n3) Active the crome developer console as described [here](https://developers.google.com/web/tools/chrome-devtools) \n\n4) Click on "Network" and then "XHR" and find a document that is named "user"\n\n5) Find your tkey after "authorisation"\n\n6) Now save your key on this bot with `p.key <key>`',
+        'description': '1) Open [pylon.bot](https://pylon.bot) in **Google Chrome**\n\n2) Go into any script\n\n3) Active the crome developer console as described [here](https://developers.google.com/web/tools/chrome-devtools) \n\n4) Click on "Network" and then "XHR" and find a document that is named "user"\n\n5) Find your key after "authorization"\n\n6) Now save your key on this bot with `p.key <key>`',
         'image': {'url':'https://cdn.discordapp.com/attachments/757169610599694356/816475908742447114/unknown.png'},
         'color': 0x426BE4
     })
@@ -69,7 +69,7 @@ async def endpoints(ctx):
 async def help(ctx):
     embed=discord.Embed.from_dict({
         'title': 'Pylon-stats commands',
-        'description': '`p.find_key` explains how to find your Pylon API key\n\n`p.key <key>` saves your key\n\n`p.stats <optional_server_id>` Gives you Pylon stats about the given server provided you have permission\n\n`p.help` Displays this message\n\n`p.endpoints` Shows the Pylon API endpoints\n\n`p.info` Get some infos about this bot',
+        'description': '`p.find_key` explains how to find your Pylon API key\n\n`p.key <key>` saves your key\n\n`p.stats <optional_server_id>` Gives you Pylon stats about the given server (provided you have permission)\n\n`p.help` Displays this message\n\n`p.endpoints` Shows the Pylon API endpoints\n\n`p.info` Get some infos about this bot',
         'color': 0x426BE4,
         'thumbnail': {'url': 'https://cdn.discordapp.com/avatars/816460731654209596/00beaa4c6b5d09fb498b8bb02bce9762.png?size=1024'}
     })
@@ -91,7 +91,7 @@ async def stats(ctx, guild_id:int=None):
         try:
             guild_id = ctx.guild.id
         except:
-            return await ctx.send('You either need to provide a guild id or use this command in a guild!')
+            return await ctx.send('You need to either provide a guild id or use this command in a guild!')
     
     key = keys.find_one({'_id': ctx.author.id})
     if key is None:
