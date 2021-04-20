@@ -28,11 +28,11 @@ async def key(ctx, key:str=None):
             keys.update_one({'_id': ctx.author.id}, {'$set': {'key': key}})
         else:
             keys.insert_one({'_id': ctx.author.id, 'key': key})
-        await ctx.send(f'Successfully updated your Pylon API key to `{key}`')
+        await ctx.send(f'Successfully updated your Pylon API key to `{key}`\n\n(*This message will be deleted after 15 seconds*)', delete_after=15)
     else:
         active_key = keys.find_one({'_id': ctx.author.id})
         if not active_key is None:
-            return await ctx.send(f'Your current registered API key is `{active_key}`')
+            return await ctx.send(f'Your current registered API key is `{active_key}`\n\n(*This message will be deleted after 15 seconds*)', delete_after=15)
         await ctx.send('You don\'t have a key registered! For an instruction how to find your API key, use `p.find_key`')
 
 @bot.command()
