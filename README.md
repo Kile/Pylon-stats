@@ -1,3 +1,5 @@
+## Archived because the bot is down and there is no reason to improve/continue this project
+
 # Pylon-stats
 <p align="center">
   <a href"https://discord.com/oauth2/authorize?client_id=816460731654209596&scope=bot&permissions=0">
